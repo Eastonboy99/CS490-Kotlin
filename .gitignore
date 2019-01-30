@@ -3,3 +3,6 @@ out/*
 
 #ignore those files too
 *.class
+*.jar
+
+.idea/workspace.xml
