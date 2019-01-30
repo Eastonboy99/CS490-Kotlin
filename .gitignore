@@ -1,0 +1,5 @@
+#Ignore compiled code
+out/*
+
+#ignore those files too
+*.class

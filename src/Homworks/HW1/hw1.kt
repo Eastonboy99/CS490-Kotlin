@@ -10,16 +10,12 @@ fun main() {
         if (i % 3 == 0) {
             print("crackle ")
             printed = true
-
         }
         if (i % 5 == 0) {
             print("pop ")
             printed = true
-
         }
-        if (!printed) {
-            print(i)
-        }
+        if (!printed) print(i)
         println("")
     }
 }
