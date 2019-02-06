@@ -2,20 +2,17 @@ package Homworks.HW1
 
 fun main() {
     for (i in 1..100) {
-        var printed = false
-        if (i % 2 == 0) {
-            print("snap ")
-            printed = true
+        when {
+            i % 2 == 0 && i % 3 == 0 && i % 5 == 0 -> println("snap crackle pop")
+            i % 2 == 0 && i % 3 == 0 -> println("snap crackle")
+            i % 3 == 0 && i % 5 == 0 -> println("crackle pop")
+            i % 2 == 0 && i % 5 == 0 -> println("snap pop")
+            i % 2 == 0 -> println("snap")
+            i % 3 == 0 -> println("crackle")
+            i % 5 == 0 -> println("pop")
+            else -> {
+                println(i)
+            }
         }
-        if (i % 3 == 0) {
-            print("crackle ")
-            printed = true
-        }
-        if (i % 5 == 0) {
-            print("pop ")
-            printed = true
-        }
-        if (!printed) print(i)
-        println("")
     }
 }
