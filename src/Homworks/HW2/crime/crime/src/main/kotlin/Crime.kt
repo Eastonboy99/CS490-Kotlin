@@ -12,30 +12,29 @@ fun parse() = File(Crime::class.java.getResource("/crimes.csv").toURI())
 
 fun main() {
     val crimes = parse()
-
     // Use kotlin.collections and the extension functions it provides to answer the following questions
     // All of these answers can be calculated using a combination of methods provided by the kotlin std lib
     // map, maxBy, minBy, groupBy, sum, average, etc
 
     println("Sacramento Crime Report, January 2006")
     println("Total crimes reported: " + crimes.size)
-    
-    val crimesPerDay = 0.0 // Fixme
+
+    val crimesPerDay =  crimes.size / crimes.groupBy { it.date }.size.toDouble()
     println("Crimes per day on average: ${crimesPerDay.roundToInt()}")
 
-    val highestCrimeDate = "1/1/06" // Fixme
-    val maxCrimes = 0 // Fixme
+    val highestCrimeDate = crimes.groupBy { it.date }.maxBy { it.value.size }?.key ?: "Unknown"
+    val maxCrimes = crimes.groupBy { it.date }.get(highestCrimeDate)?.size ?: "Unknown"
     println("$highestCrimeDate had the most reported crimes, with $maxCrimes reported.")
 
-    val highestCrimeDistrict = 0 // Fixme
+    val highestCrimeDistrict = crimes.groupBy { it.district }.maxBy { it.value.size }?.key?: "Unknown"
     println("District $highestCrimeDistrict had the most crime reported.")
 
-    val lowestCrimeDistrict = 0 // Fixme
+    val lowestCrimeDistrict = crimes.groupBy { it.district }.minBy { it.value.size }?.key?: "Unknown"
     println("District $lowestCrimeDistrict had the least crime reported.")
     
-    val distinctCrimes = 0 // Fixme
+    val distinctCrimes = crimes.groupBy { it.description }.size
     println("There were $distinctCrimes distinct types of crime reported.")
 
-    val mostFrequentCrime = "unknown" // Fixme
+    val mostFrequentCrime = crimes.groupBy { it.description }.maxBy { it.value.size }?.key?: "Unknown"
     println("The most frequently reported crime was $mostFrequentCrime")
 }
