@@ -40,10 +40,13 @@ object DefaultCardDeck {
     }
 }
 
-class PlayDeck {
-    private val deck: MutableList<Card> = DefaultCardDeck.deck
+class PlayDeck(numOfDecks:Int ) {
+    private val deck: MutableList<Card> = mutableListOf()
 
     init {
+        for(x in 0 until numOfDecks){
+            deck.apply{addAll(DefaultCardDeck.deck)}
+        }
         deck.shuffle()
     }
 

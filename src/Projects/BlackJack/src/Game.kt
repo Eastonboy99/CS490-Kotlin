@@ -32,12 +32,12 @@ class Game(val players: MutableList<Player>, val dealer: Dealer, val deck: PlayD
     }
 
     private fun takeBets() {
-        var bet = 0.0
+        var bet: Double
         players.forEach {
             bet = it.bet()
             println("Player ${it.id} bet $${bet.toMoney()}")
             println("Player ${it.id}'s balance is $${it.balance.toMoney()}")
-            dealer.bets += bet
+
         }
     }
 
@@ -89,12 +89,12 @@ class Game(val players: MutableList<Player>, val dealer: Dealer, val deck: PlayD
             }
         }
 
-        val winnings = dealer.bets / winners.size
+
 
         if (winners.size == 0)
             println("Dealer Won")
         else
-            winners.forEach {player -> player.balance += winnings; println("Player ${player.id} received $${winnings.toMoney()}") }
+            winners.forEach { player -> player.balance += player.bet * 2; println("Player ${player.id} received $${(player.bet * 2).toMoney()}") }
 
 
     }
@@ -109,7 +109,10 @@ class Game(val players: MutableList<Player>, val dealer: Dealer, val deck: PlayD
 
     private fun roundReset() {
         dealer.hand.clearHand()
-        players.forEach { it.hand.clearHand() }
-        dealer.bets = 0.0
+        players.forEach {
+            it.hand.clearHand()
+            it.bet = 0.0
+        }
+
     }
 }

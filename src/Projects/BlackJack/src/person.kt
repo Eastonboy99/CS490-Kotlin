@@ -1,25 +1,30 @@
 open class Person {
-    val hand = Hand();
+    val hand = Hand()
 
 
 }
 
-class Player(id: Int) : Person() {
+class Player(val id: Int) : Person() {
     var balance: Double = 1000.00
     var choice = ""
-    val id = id
+    var bet = 0.0
 
 
-    fun bet(): Double {
+
+    fun bet():Double {
         if (balance >= 20.0) {
             var num: Double = (5..20).shuffled().first().toDouble()
             balance -= num
 
-            return num
+            bet = num
+
         } else {
+            bet = balance
             balance = 0.0
-            return balance
+
+
         }
+        return bet
 
     }
 
@@ -34,7 +39,7 @@ class Player(id: Int) : Person() {
 }
 
 class Dealer : Person() {
-    var bets = 0.0
+//    var bets = 0.0
 
     fun showCard(i: Int) = println("Dealer has show ${hand.cards[i]}")
     fun decide(deck: PlayDeck) {
