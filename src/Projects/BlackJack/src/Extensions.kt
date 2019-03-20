@@ -1,2 +1,3 @@
-//fun Double.toMoney(): Double = Math.round(this * 100.0) / 100.0
+
+// Converts double to a money string
 fun Double.toMoney(): String = "%.2f".format(this)
